@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: laravel_nginx  # Replace with your Nginx Docker image
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: nginx-config
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+            - name: laravel-public
+              mountPath: /var/www/public
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: nginx-config
+        - name: laravel-public
+          persistentVolumeClaim:
+            claimName: laravel-public-pvc
