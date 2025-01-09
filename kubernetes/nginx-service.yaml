@@ -3,10 +3,11 @@ kind: Service
 metadata:
   name: nginx
 spec:
+  type: NodePort      # Change to NodePort
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30080  # Define an accessible port (you can choose another port)
   selector:
     app: nginx
-  ports:
-    - protocol: TCP
-      port: 80  # Exposes Nginx to external traffic
-      targetPort: 80
-  type: LoadBalancer  # or NodePort if you don't want to use LoadBalancer
+

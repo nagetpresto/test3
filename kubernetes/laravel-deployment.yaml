@@ -1,32 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: laravel
+  name: laravel-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: laravel
+      app: laravel-app
   template:
     metadata:
       labels:
-        app: laravel
+        app: laravel-app
     spec:
       containers:
-        - name: laravel
-          image: laravel_app  # Replace with your Docker image
-          ports:
-            - containerPort: 9000  # PHP-FPM port
-          env:
-            - name: DB_CONNECTION
-              value: "pgsql"
-            - name: DB_HOST
-              value: "postgres"
-            - name: DB_PORT
-              value: "5432"
-            - name: DB_DATABASE
-              value: "test3"
-            - name: DB_USERNAME
-              value: "postgres"
-            - name: DB_PASSWORD
-              value: "pass@word1"
+      - name: laravel-app
+        image: nagetpresto/laravel-app:latest  # Gantilah dengan nama image Anda di Docker Hub
+        ports:
+        - containerPort: 9000
+        env:
+        - name: DB_CONNECTION
+          value: "pgsql"
+        - name: DB_HOST
+          value: "postgres"
+        - name: DB_PORT
+          value: "5432"
+        - name: DB_DATABASE
+          value: "test3"
+        - name: DB_USERNAME
+          value: "postgres"
+        - name: DB_PASSWORD
+          value: "pass@word1"

@@ -3,10 +3,8 @@ kind: Service
 metadata:
   name: postgres
 spec:
+  ports:
+    - port: 5432
+      targetPort: 5432
   selector:
     app: postgres
-  ports:
-    - protocol: TCP
-      port: 5432  # PostgreSQL default port
-      targetPort: 5432
-  clusterIP: None  # Internal service for database access
